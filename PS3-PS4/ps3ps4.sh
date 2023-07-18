@@ -31,7 +31,8 @@ do
     echo "Running Set-Features"
     nvme set-feature "$nvme_device" -f 0x02 -v 0x03
     echo "Running Get-Features"
-    nvme get-feature "$nvme_device" -f 0x02 -s 0x00 | grep 0x000003 || break
+    # nvme get-feature "$nvme_device" -f 0x02 -s 0x00 | grep 0x000003 || break
+    nvme get-feature "$nvme_device" -f 0x02 -s 0x00 | grep 0x000003
     sleep 0.03
 
     # PS3 Exit
@@ -41,7 +42,8 @@ do
     echo "Running Set-Features"
     nvme set-feature "$nvme_device" -f 0x02 -v 0x00
     echo "Running Get-Features"
-    nvme get-feature "$nvme_device" -f 0x02 -s 0x00 | grep 00000000 || break
+    # nvme get-feature "$nvme_device" -f 0x02 -s 0x00 | grep 00000000 || break
+    nvme get-feature "$nvme_device" -f 0x02 -s 0x00 | grep 00000000
     sleep 0.06
 
     echo "PS4 in = 30ms out = 60ms | Cycles = $num_cycles | Current Loop = $i"
@@ -52,7 +54,8 @@ do
     date +%m-%d-%H-%M-%S
     date +%m-%d-%H-%M-%S >> "$log_file"
     echo "Running Get-Features"
-    nvme set-feature "$nvme_device" -f 0x02 -v 0x04 | grep 0x000004 || break
+    # nvme set-feature "$nvme_device" -f 0x02 -v 0x04 | grep 0x000004 || break
+    nvme set-feature "$nvme_device" -f 0x02 -v 0x04 | grep 0x000004
     echo "Running Get-Features"
     nvme get-feature "$nvme_device" -f 0x02 -s 0x00
     sleep 0.030
@@ -64,6 +67,7 @@ do
     echo "Running Get-Features"
     nvme set-feature "$nvme_device" -f 0x02 -v 0x00
     echo "Running Get-Features"
-    nvme get-feature "$nvme_device" -f 0x02 -s 0x00 | grep 00000000 || break
+    # nvme get-feature "$nvme_device" -f 0x02 -s 0x00 | grep 00000000 || break
+    nvme get-feature "$nvme_device" -f 0x02 -s 0x00 | grep 00000000
     sleep 0.060
 done
