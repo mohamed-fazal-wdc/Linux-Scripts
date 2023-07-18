@@ -27,16 +27,15 @@ print_and_log() {
 
 for ((i = 1; i <= num_cycles; i++))
 do
-    print_and_log "PS3 in = 30ms out = 60ms | Cycles = $num_cycles | Current Loop = $i"
+    print_and_log "PS3/PS4 | In = 30ms | Out = 60ms | Total Cycles = $num_cycles | Current Cycle = $i"
 
     # PS3 Entry
-    print_and_log "PS3 Entry"
-    print_and_log "$(date +%m-%d-%H-%M-%S)"
-    print_and_log "Running Set-Features"
+    print_and_log "PS3 Entry $(date +%m/%d %H:%M:%S)"
+    echo "Running Set-Features"
     output=$(nvme set-feature "$nvme_device" -f 0x02 -v 0x03)
     value=$(echo "$output" | awk -F', ' '{split($2, arr, ":"); print arr[2]}')
     print_and_log "Extracted value from Set-Features: $value"
-    print_and_log "Running Get-Features"
+    echo "Running Get-Features"
     get_output=$(nvme get-feature "$nvme_device" -f 0x02 -s 0x00)
     get_value=$(echo "$get_output" | awk -F', ' '{split($2, arr, ":"); print arr[2]}')
     print_and_log "Extracted value from Get-Features: $get_value"
@@ -49,13 +48,12 @@ do
     fi
 
     # PS3 Exit
-    print_and_log "PS3 Exit"
-    print_and_log "$(date +%m-%d-%H-%M-%S)"
-    print_and_log "Running Set-Features"
+    print_and_log "PS3 Exit $(date +%m/%d %H:%M:%S)"
+    echo "Running Set-Features"
     output=$(nvme set-feature "$nvme_device" -f 0x02 -v 0x00)
     value=$(echo "$output" | awk -F', ' '{split($2, arr, ":"); print arr[2]}')
     print_and_log "Extracted value from Set-Features: $value"
-    print_and_log "Running Get-Features"
+    echo "Running Get-Features"
     get_output=$(nvme get-feature "$nvme_device" -f 0x02 -s 0x00)
     get_value=$(echo "$get_output" | awk -F', ' '{split($2, arr, ":"); print arr[2]}')
     print_and_log "Extracted value from Get-Features: $get_value"
@@ -67,16 +65,13 @@ do
         exit 1
     fi
 
-    print_and_log "PS4 in = 30ms out = 60ms | Cycles = $num_cycles | Current Loop = $i"
-
     # PS4 Entry
-    print_and_log "PS4 Entry"
-    print_and_log "$(date +%m-%d-%H-%M-%S)"
-    print_and_log "Running Get-Features"
+    print_and_log "PS4 Entry $(date +%m/%d %H:%M:%S)"
+    echo "Running Get-Features"
     output=$(nvme set-feature "$nvme_device" -f 0x02 -v 0x04)
     value=$(echo "$output" | awk -F', ' '{split($2, arr, ":"); print arr[2]}')
     print_and_log "Extracted value from Set-Features: $value"
-    print_and_log "Running Get-Features"
+    echo "Running Get-Features"
     get_output=$(nvme get-feature "$nvme_device" -f 0x02 -s 0x00)
     get_value=$(echo "$get_output" | awk -F', ' '{split($2, arr, ":"); print arr[2]}')
     print_and_log "Extracted value from Get-Features: $get_value"
@@ -89,13 +84,12 @@ do
     fi
 
     # PS4 Exit
-    print_and_log "PS4 Exit"
-    print_and_log "$(date +%m-%d-%H-%M-%S)"
-    print_and_log "Running Get-Features"
+    print_and_log "PS4 Exit $(date +%m/%d %H:%M:%S)"
+    echo "Running Get-Features"
     output=$(nvme set-feature "$nvme_device" -f 0x02 -v 0x00)
     value=$(echo "$output" | awk -F', ' '{split($2, arr, ":"); print arr[2]}')
     print_and_log "Extracted value from Set-Features: $value"
-    print_and_log "Running Get-Features"
+    echo "Running Get-Features"
     get_output=$(nvme get-feature "$nvme_device" -f 0x02 -s 0x00)
     get_value=$(echo "$get_output" | awk -F', ' '{split($2, arr, ":"); print arr[2]}')
     print_and_log "Extracted value from Get-Features: $get_value"
