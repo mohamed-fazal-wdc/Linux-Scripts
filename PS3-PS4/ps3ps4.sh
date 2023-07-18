@@ -35,12 +35,18 @@ do
     print_and_log "Running Set-Features"
     output=$(nvme set-feature "$nvme_device" -f 0x02 -v 0x03)
     value=$(echo "$output" | awk -F', ' '{split($2, arr, ":"); print arr[2]}')
-    print_and_log "Extracted value: $value"
+    print_and_log "Extracted value from Set-Features: $value"
     print_and_log "Running Get-Features"
-    output=$(nvme get-feature "$nvme_device" -f 0x02 -s 0x00)
-    value=$(echo "$output" | awk -F', ' '{split($2, arr, ":"); print arr[2]}')
-    print_and_log "Extracted value: $value"
+    get_output=$(nvme get-feature "$nvme_device" -f 0x02 -s 0x00)
+    get_value=$(echo "$get_output" | awk -F', ' '{split($2, arr, ":"); print arr[2]}')
+    print_and_log "Extracted value from Get-Features: $get_value"
     sleep 0.03
+
+    # Compare values and exit on fail
+    if [ "$value" != "$get_value" ]; then
+        print_and_log "ERROR: Extracted value from Get-Features does not match the value from Set-Features!"
+        exit 1
+    fi
 
     # PS3 Exit
     print_and_log "PS3 Exit"
@@ -48,12 +54,18 @@ do
     print_and_log "Running Set-Features"
     output=$(nvme set-feature "$nvme_device" -f 0x02 -v 0x00)
     value=$(echo "$output" | awk -F', ' '{split($2, arr, ":"); print arr[2]}')
-    print_and_log "Extracted value: $value"
+    print_and_log "Extracted value from Set-Features: $value"
     print_and_log "Running Get-Features"
-    output=$(nvme get-feature "$nvme_device" -f 0x02 -s 0x00)
-    value=$(echo "$output" | awk -F', ' '{split($2, arr, ":"); print arr[2]}')
-    print_and_log "Extracted value: $value"
+    get_output=$(nvme get-feature "$nvme_device" -f 0x02 -s 0x00)
+    get_value=$(echo "$get_output" | awk -F', ' '{split($2, arr, ":"); print arr[2]}')
+    print_and_log "Extracted value from Get-Features: $get_value"
     sleep 0.06
+
+    # Compare values and exit on fail
+    if [ "$value" != "$get_value" ]; then
+        print_and_log "ERROR: Extracted value from Get-Features does not match the value from Set-Features!"
+        exit 1
+    fi
 
     print_and_log "PS4 in = 30ms out = 60ms | Cycles = $num_cycles | Current Loop = $i"
 
@@ -63,12 +75,18 @@ do
     print_and_log "Running Get-Features"
     output=$(nvme set-feature "$nvme_device" -f 0x02 -v 0x04)
     value=$(echo "$output" | awk -F', ' '{split($2, arr, ":"); print arr[2]}')
-    print_and_log "Extracted value: $value"
+    print_and_log "Extracted value from Set-Features: $value"
     print_and_log "Running Get-Features"
-    output=$(nvme get-feature "$nvme_device" -f 0x02 -s 0x00)
-    value=$(echo "$output" | awk -F', ' '{split($2, arr, ":"); print arr[2]}')
-    print_and_log "Extracted value: $value"
+    get_output=$(nvme get-feature "$nvme_device" -f 0x02 -s 0x00)
+    get_value=$(echo "$get_output" | awk -F', ' '{split($2, arr, ":"); print arr[2]}')
+    print_and_log "Extracted value from Get-Features: $get_value"
     sleep 0.030
+
+    # Compare values and exit on fail
+    if [ "$value" != "$get_value" ]; then
+        print_and_log "ERROR: Extracted value from Get-Features does not match the value from Set-Features!"
+        exit 1
+    fi
 
     # PS4 Exit
     print_and_log "PS4 Exit"
@@ -76,10 +94,16 @@ do
     print_and_log "Running Get-Features"
     output=$(nvme set-feature "$nvme_device" -f 0x02 -v 0x00)
     value=$(echo "$output" | awk -F', ' '{split($2, arr, ":"); print arr[2]}')
-    print_and_log "Extracted value: $value"
+    print_and_log "Extracted value from Set-Features: $value"
     print_and_log "Running Get-Features"
-    output=$(nvme get-feature "$nvme_device" -f 0x02 -s 0x00)
-    value=$(echo "$output" | awk -F', ' '{split($2, arr, ":"); print arr[2]}')
-    print_and_log "Extracted value: $value"
+    get_output=$(nvme get-feature "$nvme_device" -f 0x02 -s 0x00)
+    get_value=$(echo "$get_output" | awk -F', ' '{split($2, arr, ":"); print arr[2]}')
+    print_and_log "Extracted value from Get-Features: $get_value"
     sleep 0.060
+
+    # Compare values and exit on fail
+    if [ "$value" != "$get_value" ]; then
+        print_and_log "ERROR: Extracted value from Get-Features does not match the value from Set-Features!"
+        exit 1
+    fi
 done
