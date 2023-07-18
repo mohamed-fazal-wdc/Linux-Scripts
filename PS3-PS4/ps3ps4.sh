@@ -8,9 +8,11 @@ fi
 
 log_file="PS3_PS4_$(date +%Y%m%d%H%M%S).log"
 
-# Run output=$);value=$(echo "$output" | awk -F', ' '{split($2, arr, ":"); print arr[2]}');echo "Extracted value: $value"
-echo -n);value=$(echo "$output" | awk -F', ' '{split($2, arr, ":"); print arr[2]}');echo "Extracted value: $value"
-read nvme_number
+# Run nvme list and prompt user to select the NVMe drive
+echo "Available NVMe drives:"
+nvme list
+echo -n "Enter the number corresponding to the NVMe drive: "
+read nvme_numberread nvme_number
 
 nvme_device="/dev/nvme${nvme_number}"
 
