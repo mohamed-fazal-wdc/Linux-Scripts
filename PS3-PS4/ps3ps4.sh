@@ -12,7 +12,7 @@ log_file="PS3_PS4_$(date +%Y%m%d%H%M%S).log"
 echo "Available NVMe drives:"
 nvme list
 echo -n "Enter the number corresponding to the NVMe drive: "
-read nvme_numberread nvme_number
+read nvme_number
 
 nvme_device="/dev/nvme${nvme_number}"
 
