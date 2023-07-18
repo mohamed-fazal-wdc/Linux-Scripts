@@ -25,6 +25,7 @@ do
     echo "PS3 in = 30ms out = 60ms | Cycles = $num_cycles | Current Loop = $i" >> "$log_file"
 
     # PS3 Entry
+    echo "PS3 Entry"
     date +%m-%d-%H-%M-%S
     date +%m-%d-%H-%M-%S >> "$log_file"
     nvme set-feature "$nvme_device" -f 0x02 -v 0x03
@@ -32,6 +33,7 @@ do
     sleep 0.03
 
     # PS3 Exit
+    echo "PS3 Exit"
     date +%m-%d-%H-%M-%S
     date +%m-%d-%H-%M-%S >> "$log_file"
     nvme set-feature "$nvme_device" -f 0x02 -v 0x00
@@ -42,6 +44,7 @@ do
     echo "PS4 in = 30ms out = 60ms | Cycles = $num_cycles | Current Loop = $i" >> "$log_file"
 
     # PS4 Entry
+    echo "PS4 Entry"
     date +%m-%d-%H-%M-%S
     date +%m-%d-%H-%M-%S >> "$log_file"
     nvme set-feature "$nvme_device" -f 0x02 -v 0x04 | grep 0x000004 || break
@@ -49,6 +52,7 @@ do
     sleep 0.030
 
     # PS4 Exit
+    echo "PS4 Exit"
     date +%m-%d-%H-%M-%S
     date +%m-%d-%H-%M-%S >> "$log_file"
     nvme set-feature "$nvme_device" -f 0x02 -v 0x00
