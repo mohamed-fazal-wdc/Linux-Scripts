@@ -100,4 +100,5 @@ do
         print_and_log "ERROR: Extracted value from Get-Features does not match the value from Set-Features!"
         exit 1
     fi
+    clear
 done
